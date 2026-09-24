@@ -283,6 +283,21 @@
   }
 }
 
+/* Sonner's theme colors lose to the page background, which leaves pale text on a pale toast. */
+[data-sonner-toast] {
+  background: #16191e !important;
+  color: #ffffff !important;
+  border-color: #333c5c !important;
+}
+
+[data-sonner-toast] [data-title] {
+  color: #ffffff !important;
+}
+
+[data-sonner-toast] [data-description] {
+  color: #f8f8ff !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

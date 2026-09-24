@@ -81,8 +81,10 @@ const ApprovalDialog = ({
         <DialogClose asChild>
           <Button
             className={cn(
-              'text-light-300 rounded-xl px-3.5 py-8 font-bold text-base',
-              variant === 'SUCCESS' ? 'bg-green-400' : 'bg-red-400',
+              'rounded-xl px-3.5 py-8 font-bold text-base',
+              variant === 'SUCCESS'
+                ? 'bg-green-400 text-white'
+                : 'bg-red-400 text-dark-100',
             )}
             onClick={handleApproval}
           >

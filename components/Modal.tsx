@@ -1,7 +1,6 @@
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -38,7 +37,6 @@ const Modal = () => {
           <p>Password: Password123@</p>
         </div>
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
           <AlertDialogAction>Got it</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

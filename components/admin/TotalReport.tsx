@@ -23,13 +23,22 @@ const TotalReport = async () => {
     const startOfLastWeek = new Date(startOfThisWeek);
     startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
 
-    // Fetch books data
-    const [booksTotal, booksThisWeek, booksLastWeek] = await Promise.all([
-      db.select({ total: sql<number>`COUNT(${books.id})` }).from(books), // Get total book records
+    const [
+      booksTotal,
+      booksThisWeek,
+      booksLastWeek,
+      usersTotal,
+      usersThisWeek,
+      usersLastWeek,
+      borrowedRecordsTotal,
+      borrowedRecordsThisWeek,
+      borrowedRecordsLastWeek,
+    ] = await Promise.all([
+      db.select({ total: sql<number>`COUNT(${books.id})` }).from(books),
       db
         .select({ total: sql<number>`COUNT(${books.id})` })
         .from(books)
-        .where(gte(books.createdAt, startOfThisWeek)), // Get this week's book count
+        .where(gte(books.createdAt, startOfThisWeek)),
       db
         .select({ total: sql<number>`COUNT(${books.id})` })
         .from(books)
@@ -38,46 +47,12 @@ const TotalReport = async () => {
             gte(books.createdAt, startOfLastWeek),
             lt(books.createdAt, startOfThisWeek),
           ),
-        ), // Get last week's book count
-      db.select({ total: sql<number>`COUNT(${users.id})` }).from(users), // Get total user records
+        ),
+      db.select({ total: sql<number>`COUNT(${users.id})` }).from(users),
       db
         .select({ total: sql<number>`COUNT(${users.id})` })
         .from(users)
-        .where(gte(users.createdAt, startOfThisWeek)), // Get this week's user count
-      db
-        .select({ total: sql<number>`COUNT(${users.id})` })
-        .from(users)
-        .where(
-          and(
-            gte(users.createdAt, startOfLastWeek),
-            lt(users.createdAt, startOfThisWeek),
-          ),
-        ), // Get last week's user count
-      db
-        .select({ total: sql<number>`COUNT(${borrowRecords.id})` })
-        .from(borrowRecords), // Get total user records
-      db
-        .select({ total: sql<number>`COUNT(${borrowRecords.id})` })
-        .from(borrowRecords)
-        .where(gte(borrowRecords.createdAt, startOfThisWeek)), // Get this week's user count
-      db
-        .select({ total: sql<number>`COUNT(${borrowRecords.id})` })
-        .from(borrowRecords)
-        .where(
-          and(
-            gte(borrowRecords.createdAt, startOfLastWeek),
-            lt(borrowRecords.createdAt, startOfThisWeek),
-          ),
-        ), // Get last week's user count
-    ]);
-
-    // Fetch users data
-    const [usersTotal, usersThisWeek, usersLastWeek] = await Promise.all([
-      db.select({ total: sql<number>`COUNT(${users.id})` }).from(users), // Get total user records
-      db
-        .select({ total: sql<number>`COUNT(${users.id})` })
-        .from(users)
-        .where(gte(users.createdAt, startOfThisWeek)), // Get this week's user count
+        .where(gte(users.createdAt, startOfThisWeek)),
       db
         .select({ total: sql<number>`COUNT(${users.id})` })
         .from(users)
@@ -86,22 +61,14 @@ const TotalReport = async () => {
             gte(users.createdAt, startOfLastWeek),
             lt(users.createdAt, startOfThisWeek),
           ),
-        ), // Get last week's user count
-    ]);
-
-    // Fetch borrowed records data
-    const [
-      borrowedRecordsTotal,
-      borrowedRecordsThisWeek,
-      borrowedRecordsLastWeek,
-    ] = await Promise.all([
+        ),
       db
         .select({ total: sql<number>`COUNT(${borrowRecords.id})` })
-        .from(borrowRecords), // Get total user records
+        .from(borrowRecords),
       db
         .select({ total: sql<number>`COUNT(${borrowRecords.id})` })
         .from(borrowRecords)
-        .where(gte(borrowRecords.createdAt, startOfThisWeek)), // Get this week's user count
+        .where(gte(borrowRecords.createdAt, startOfThisWeek)),
       db
         .select({ total: sql<number>`COUNT(${borrowRecords.id})` })
         .from(borrowRecords)
@@ -110,7 +77,7 @@ const TotalReport = async () => {
             gte(borrowRecords.createdAt, startOfLastWeek),
             lt(borrowRecords.createdAt, startOfThisWeek),
           ),
-        ), // Get last week's user count
+        ),
     ]);
 
     // Format the totalReport
