@@ -1,18 +1,14 @@
 import ImageKit from 'imagekit';
 import dummyBooks from '../dummybooks.json';
 import { config } from 'dotenv';
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import { createDb } from './db';
 import { books } from './schema';
 
 config({
   path: '.env.local',
 });
 
-const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle({
-  client: sql,
-});
+const db = createDb(process.env.DATABASE_URL!);
 
 const imagekit = new ImageKit({
   publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,

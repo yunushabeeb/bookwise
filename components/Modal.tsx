@@ -27,14 +27,14 @@ const Modal = () => {
           <p>
             <strong>Admin Login:</strong>
           </p>
-          <p>Email: bookwiseadmin@gmail.com</p>
+          <p>Email: admin@bookwise.com</p>
           <p>Password: Password123@</p>
         </div>
         <div className="mt-4">
           <p>
             <strong>User Login:</strong>
           </p>
-          <p>Email: bookwiseuser@gmail.com</p>
+          <p>Email: user@bookwise.com</p>
           <p>Password: Password123@</p>
         </div>
         <AlertDialogFooter>

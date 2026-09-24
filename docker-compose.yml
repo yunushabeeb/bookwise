@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: bookwise-db
+    restart: unless-stopped
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: bookwise
+      POSTGRES_PASSWORD: bookwise
+      POSTGRES_DB: bookwise
+    volumes:
+      - bookwise_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bookwise -d bookwise"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  bookwise_pgdata:
